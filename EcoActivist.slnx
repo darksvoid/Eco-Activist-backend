@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/EcoActivist.Api/EcoActivist.Api.csproj" />
+    <Project Path="src/EcoActivist.Application/EcoActivist.Application.csproj" />
+    <Project Path="src/EcoActivist.Domain/EcoActivist.Domain.csproj" />
+    <Project Path="src/EcoActivist.Infrastructure/EcoActivist.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/EcoActivist.Tests/EcoActivist.Tests.csproj" />
+  </Folder>
+</Solution>

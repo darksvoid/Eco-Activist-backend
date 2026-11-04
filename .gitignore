@@ -1,0 +1,71 @@
+﻿# ==========================================
+# JetBrains Rider & IntelliJ IDEA
+# ==========================================
+# Директория настроек рабочей области (персональные настройки, кэши, локальная история)
+.idea/
+*.sln.iml
+
+# Персональные настройки ReSharper / Rider
+*.DotSettings.user
+_ReSharper*/
+*.[Rr]e[Ss]harper
+
+# Папка с кэшами и историей Rider (может создаваться в корне)
+.Rider/
+
+# ==========================================
+# .NET / C# (Сборки, кэши, пакеты)
+# ==========================================
+# Результаты сборки
+[Bb]in/
+[Oo]bj/
+
+# Файлы тестирования и покрытия кода
+[Tt]est[Rr]esults/
+*.coverage
+*.coveragexml
+coverage.json
+coveragereport/
+BenchmarkDotNet.Artifacts/
+
+# Локальные файлы конфигурации (секреты и настройки БД разработчика)
+appsettings.Development.json
+appsettings.Local.json
+*.user
+
+# Пакеты NuGet
+*.nupkg
+*.snupkg
+.nuget/
+!/.nuget/packages.config
+packages/
+!packages/repositories.config
+
+# ==========================================
+# Visual Studio (на случай, если кто-то из команды использует VS)
+# ==========================================
+.vs/
+*.suo
+*.userosscache
+*.sln.docstates
+
+# ==========================================
+# Инфраструктура и логи
+# ==========================================
+# Логи
+*.log
+
+# Базы данных (локальные SQLite или AttachDB)
+*.sqlite
+*.db
+*.mdf
+*.ldf
+
+# Mac OS / Windows системные файлы
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
