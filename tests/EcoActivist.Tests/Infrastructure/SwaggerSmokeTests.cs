@@ -1,13 +1,12 @@
 using System.Net;
-using Microsoft.AspNetCore.Mvc.Testing;
 
 namespace EcoActivist.Tests.Infrastructure;
 
-public class SwaggerSmokeTests : IClassFixture<WebApplicationFactory<Program>>
+public class SwaggerSmokeTests : IClassFixture<NoDatabaseApiFactory>
 {
     private readonly HttpClient _client;
 
-    public SwaggerSmokeTests(WebApplicationFactory<Program> factory)
+    public SwaggerSmokeTests(NoDatabaseApiFactory factory)
     {
         _client = factory.CreateClient();
     }
@@ -19,12 +18,16 @@ public class SwaggerSmokeTests : IClassFixture<WebApplicationFactory<Program>>
 
         response.EnsureSuccessStatusCode();
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-        
+
         var contentType = response.Content.Headers.ContentType?.ToString();
         Assert.NotNull(contentType);
         Assert.Contains("application/json", contentType);
+
+        var document = await response.Content.ReadAsStringAsync();
+        Assert.Contains("/api/v1/events/{id}/apply", document);
+        Assert.Contains("Bearer", document);
     }
-    
+
     [Fact]
     public async Task Get_SwaggerUI_ReturnsSuccess()
     {

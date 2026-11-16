@@ -1,14 +1,13 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
-using Microsoft.AspNetCore.Mvc.Testing;
 
 namespace EcoActivist.Tests.Infrastructure;
 
-public class HealthCheckSmokeTests : IClassFixture<WebApplicationFactory<Program>>
+public class HealthCheckSmokeTests : IClassFixture<NoDatabaseApiFactory>
 {
     private readonly HttpClient _client;
 
-    public HealthCheckSmokeTests(WebApplicationFactory<Program> factory)
+    public HealthCheckSmokeTests(NoDatabaseApiFactory factory)
     {
         _client = factory.CreateClient();
     }
@@ -25,6 +24,17 @@ public class HealthCheckSmokeTests : IClassFixture<WebApplicationFactory<Program
         Assert.NotNull(result);
         Assert.Equal("Healthy", result.Status);
         Assert.NotEqual(default, result.Timestamp);
+    }
+
+    [Theory]
+    [InlineData("/api/v1/applications/my")]
+    [InlineData("/api/v1/volunteer/profile")]
+    [InlineData("/api/v1/admin/articles")]
+    public async Task ProtectedEndpoints_WithoutToken_Return401(string url)
+    {
+        var response = await _client.GetAsync(url);
+
+        Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
     }
 
     private class HealthStatusResponse
