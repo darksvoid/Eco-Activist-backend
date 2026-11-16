@@ -1,6 +1,34 @@
-@EcoActivist.Api_HostAddress = http://localhost:5083
+@host = http://localhost:5083
+@token = <paste access token>
 
-GET {{EcoActivist.Api_HostAddress}}/weatherforecast/
+### Register volunteer
+POST {{host}}/api/v1/auth/register
+Content-Type: application/json
+
+{
+  "email": "volunteer@example.com",
+  "phone": "+79990000000",
+  "password": "Str0ng#Password",
+  "role": "Volunteer"
+}
+
+### Login
+POST {{host}}/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "email": "volunteer@example.com",
+  "password": "Str0ng#Password"
+}
+
+### Catalog sorted by distance
+GET {{host}}/api/v1/events?sortBy=Distance&userLat=55.7558&userLon=37.6173&page=1&pageSize=20
 Accept: application/json
 
-###
+### My applications
+GET {{host}}/api/v1/applications/my
+Authorization: Bearer {{token}}
+
+### Volunteer profile
+GET {{host}}/api/v1/volunteer/profile
+Authorization: Bearer {{token}}
